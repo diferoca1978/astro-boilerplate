@@ -15,10 +15,14 @@ pnpm-debug.log*
 
 # environment variables
 .env
-.env.production
 
-# macOS-specific files
-.DS_Store
+# Claude
+.claude/
+.CLAUDE.md
 
-# jetbrains setting folder
-.idea/
+
+
+
+
+# Local Netlify folder
+.netlify
