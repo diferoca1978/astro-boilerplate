@@ -517,6 +517,96 @@ export function generateBreadcrumbSchema(
 }
 
 /**
+ * Generate Service Schema for individual service pages
+ * Use on /services/[slug] pages
+ */
+export function generateServiceSchema(service: Service): JSONLDSchema {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${COMPANY_INFO.url}/services/${service.slug}#service`,
+    name: service.title,
+    description: service.seoDescription,
+    url: `${COMPANY_INFO.url}/services/${service.slug}`,
+    provider: {
+      "@id": `${COMPANY_INFO.url}#organization`,
+    },
+    areaServed: {
+      "@type": "Country",
+      name: COMPANY_INFO.address.country,
+    },
+    ...(service.image && {
+      image: {
+        "@type": "ImageObject",
+        url: `${COMPANY_INFO.url}${service.image}`,
+      },
+    }),
+    ...(service.benefits && service.benefits.length > 0 && {
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: `${service.title} - Beneficios`,
+        itemListElement: service.benefits.map((benefit, index) => ({
+          "@type": "Offer",
+          position: index + 1,
+          itemOffered: {
+            "@type": "Service",
+            name: benefit,
+          },
+        })),
+      },
+    }),
+    offers: {
+      "@type": "Offer",
+      availability: "https://schema.org/InStock",
+      url: `${COMPANY_INFO.url}/services/${service.slug}`,
+      seller: {
+        "@id": `${COMPANY_INFO.url}#organization`,
+      },
+    },
+  };
+}
+
+/**
+ * LocalBusiness Schema for contact page and local SEO
+ * Critical for Google Maps and local search rankings
+ */
+export const LOCAL_BUSINESS_SCHEMA: JSONLDSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": `${COMPANY_INFO.url}#localbusiness`,
+  name: COMPANY_INFO.name,
+  description: COMPANY_INFO.description,
+  url: COMPANY_INFO.url,
+  telephone: COMPANY_INFO.phone,
+  email: COMPANY_INFO.email,
+  logo: `${COMPANY_INFO.url}${COMPANY_INFO.logo}`,
+  image: `${COMPANY_INFO.url}${COMPANY_INFO.image}`,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: COMPANY_INFO.address.street,
+    addressLocality: COMPANY_INFO.address.city,
+    addressRegion: COMPANY_INFO.address.region,
+    postalCode: COMPANY_INFO.address.postalCode,
+    addressCountry: COMPANY_INFO.address.countryCode,
+  },
+  ...(COMPANY_INFO.geo && {
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: COMPANY_INFO.geo.latitude,
+      longitude: COMPANY_INFO.geo.longitude,
+    },
+  }),
+  sameAs: Object.values(COMPANY_INFO.socialMedia).filter(Boolean),
+  openingHoursSpecification: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    opens: "09:00",
+    closes: "18:00",
+  },
+  priceRange: "$$",
+};
+
+/**
  * Generate Author/Person Schema for E-E-A-T
  * Use for blog posts and about page
  */
@@ -558,4 +648,5 @@ export const ALL_BASE_SCHEMAS = {
   organization: ORGANIZATION_SCHEMA,
   website: WEBSITE_SCHEMA,
   blog: BLOG_SCHEMA,
+  localBusiness: LOCAL_BUSINESS_SCHEMA,
 };
