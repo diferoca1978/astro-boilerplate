@@ -1,11 +1,11 @@
 import type { APIRoute } from "astro";
 
 const getRobotsTxt = (sitemapURL: URL, siteURL: URL) => `
-# All crawlers
+
 User-agent: *
 Allow: /
 
-# AI Crawlers - Critical for visibility in ChatGPT, Gemini, Perplexity
+
 User-agent: GPTBot
 Allow: /
 

@@ -3,8 +3,6 @@
 // src/config/authors.ts
 // =============================================================================
 
-import { COMPANY_INFO } from "./seoConf";
-
 export interface Author {
   /** Author's full name */
   name: string;
@@ -66,13 +64,13 @@ export const AUTHORS: Author[] = [
  * Uses organization as generic author
  */
 export const DEFAULT_AUTHOR: Author = {
-  name: COMPANY_INFO.name,
+  name: "Your Company Name", // TODO: replace with COMPANY_INFO.name
   role: "Digital Agency",
-  bio: COMPANY_INFO.description,
+  bio: "We help businesses grow online through design, development, and strategy.", // TODO: replace with COMPANY_INFO.description
   credentials: ["Digital Marketing", "Web Design", "Brand Strategy"],
   socialMedia: {
-    linkedin: COMPANY_INFO.socialMedia.linkedin,
-    instagram: COMPANY_INFO.socialMedia.instagram,
+    linkedin: "https://www.linkedin.com/company/your-company", // TODO: replace with COMPANY_INFO.socialMedia.linkedin
+    instagram: "https://www.instagram.com/your-company", // TODO: replace with COMPANY_INFO.socialMedia.instagram
   },
 };
 
