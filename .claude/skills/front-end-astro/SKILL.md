@@ -50,18 +50,20 @@ Implement Astro components (.astro files) that are:
 - **NO framework components**: Do NOT use React, Vue, Solid, Preact, or any UI framework syntax
 - **HTML + Tailwind only**: Structure with semantic HTML, style with Tailwind utility classes
 - **NO inline styles**: NEVER use `style=""` attributes on any element. All styling must be done exclusively via Tailwind CSS utility classes.
+- **NO arbitrary values**: NEVER use `h-[220px]` arbitrary values on any utitility class.
 - **NO animations**: If GSAP is installed in the project, do NOT add animations — these are handled in separate utility files
 - **Respect project structure**: Follow component organization from CLAUDE.md (global/, landing/, perPage/, ui/)
 - **Tailwind CSS v4 gradient syntax**: NEVER use `bg-gradient-to-*` (deprecated v3 syntax). ALWAYS use `bg-linear-to-*` instead. Examples: `bg-linear-to-br`, `bg-linear-to-r`, `bg-linear-to-t`. This applies to all gradient direction utilities.
 - **Images via Astro Image component**: ALWAYS use `<Image />` (or `<Picture />`) imported from `astro:assets` for every image. NEVER use a raw `<img>` tag. This enforces Astro's built-in image optimization (format conversion, lazy loading, correct dimensions). The `alt` attribute is required on every `<Image />`.
+- **SVG icons - NO inline SVGs**: NEVER write inline `<svg>` markup directly in components. ALWAYS import SVG files from the assets directory and use them as components. Example: `import arrowIcon from "@/assets/icons/arrow.svg"` then use as `<arrowIcon class="h-6 w-6" />`. This keeps components clean, enables SVG reuse, and allows for proper optimization. If an SVG asset doesn't exist, create it and put it into `@/assets/icons/`, but DO NOT create inline SVG markup.
 
 ## Frontend Aesthetics Guidelines
 
 Focus on:
 
-- **Typography**: FIRST read `src/styles/global.css` to understand existing font families and typography system. Use the project's established fonts and type scale. Only suggest new fonts if the project lacks a clear typography system. Avoid generic fonts like Arial and Inter; prefer distinctive choices that match the project's aesthetic direction.
+- **Typography**: FIRST read `src/styles/global.css` to understand existing font families and typography system. Use the project's established fonts and type scale. Never use redundant utility classes on text tags if these are set in `src/styles/global.css` (@layer base {}) object. Only suggest new fonts if the project lacks a clear typography system. Avoid generic fonts like Arial and Inter; prefer distinctive choices that match the project's aesthetic direction.
 - **Color & Theme**: FIRST read `src/styles/global.css` to understand the existing color palette, CSS custom properties, and theme system. Use the project's established colors and design tokens. Build components that align with the existing aesthetic direction. Only suggest new colors if they complement the established palette or if no theme exists.
-- **Motion**: ONLY if GSAP is NOT installed - use CSS animations/transitions for micro-interactions. If GSAP is present, skip animations entirely (handled separately). Focus on CSS hover states, transitions, and transforms.
+- **Motion**: ONLY if GSAP is NOT installed - use tailwind CSS animations/transitions for micro-interactions. If GSAP is present, skip animations entirely (handled separately). Focus on TailwindCSS hover states, transitions, and transforms.
 - **Spatial Composition**: Unexpected layouts. Asymmetry. Overlap. Diagonal flow. Grid-breaking elements. Generous negative space OR controlled density. Leverage Tailwind's grid and flexbox utilities.
 - **Backgrounds & Visual Details**: Create atmosphere and depth with Tailwind gradient utilities, background patterns, shadows, borders. Use backdrop-blur, opacity layers, and decorative SVG elements.
 
