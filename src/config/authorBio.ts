@@ -1,7 +1,9 @@
 // =============================================================================
 // AUTHORS CONFIGURATION
-// src/config/authors.ts
+// src/config/authorBio.ts
 // =============================================================================
+
+import { COMPANY_INFO } from './seo';
 
 export interface Author {
   /** Author's full name */
@@ -30,32 +32,32 @@ export interface Author {
  */
 export const AUTHORS: Author[] = [
   {
-    name: "Jane Doe",
-    role: "Co-founder & Brand Strategist",
-    bio: "Brand strategy specialist with 10+ years helping businesses build authentic connections with their audience.",
-    image: "/images/team/jane-doe.jpg",
-    credentials: ["Brand Strategy", "Digital Marketing", "Content Creation"],
+    name: "María González",
+    role: "Co-fundadora & Estratega de Marca",
+    bio: "Especialista en estrategia de marca con más de 10 años ayudando a empresas a construir conexiones auténticas con su audiencia.",
+    image: "/images/team/maria-gonzalez.jpg",
+    credentials: ["Estrategia de Marca", "Marketing Digital", "Creación de Contenido"],
     socialMedia: {
-      instagram: "https://www.instagram.com/janedoe/",
-      linkedin: "https://www.linkedin.com/in/janedoe/",
+      instagram: "https://www.instagram.com/mariagonzalez/",
+      linkedin: "https://www.linkedin.com/in/mariagonzalez/",
     },
-    url: "/about#jane-doe",
+    url: "/nosotros#maria-gonzalez",
   },
   {
-    name: "John Smith",
-    role: "Co-founder & Web Developer",
-    bio: "Full-stack developer specialized in high-performance websites with modern technologies and SEO optimization.",
-    image: "/images/team/john-smith.jpg",
+    name: "Carlos Rodríguez",
+    role: "Co-fundador & Desarrollador Web",
+    bio: "Desarrollador full-stack especializado en sitios web de alto rendimiento con tecnologías modernas y optimización SEO.",
+    image: "/images/team/carlos-rodriguez.jpg",
     credentials: [
-      "Web Development",
-      "Performance Optimization",
-      "Technical SEO",
+      "Desarrollo Web",
+      "Optimización de Rendimiento",
+      "SEO Técnico",
     ],
     socialMedia: {
-      linkedin: "https://www.linkedin.com/in/johnsmith/",
-      twitter: "https://twitter.com/johnsmith",
+      linkedin: "https://www.linkedin.com/in/carlosrodriguez/",
+      twitter: "https://twitter.com/carlosrodriguez",
     },
-    url: "/about#john-smith",
+    url: "/nosotros#carlos-rodriguez",
   },
 ];
 
@@ -64,13 +66,13 @@ export const AUTHORS: Author[] = [
  * Uses organization as generic author
  */
 export const DEFAULT_AUTHOR: Author = {
-  name: "Your Company Name", // TODO: replace with COMPANY_INFO.name
+  name: COMPANY_INFO.name,
   role: "Digital Agency",
-  bio: "We help businesses grow online through design, development, and strategy.", // TODO: replace with COMPANY_INFO.description
+  bio: COMPANY_INFO.description,
   credentials: ["Digital Marketing", "Web Design", "Brand Strategy"],
   socialMedia: {
-    linkedin: "https://www.linkedin.com/company/your-company", // TODO: replace with COMPANY_INFO.socialMedia.linkedin
-    instagram: "https://www.instagram.com/your-company", // TODO: replace with COMPANY_INFO.socialMedia.instagram
+    linkedin: COMPANY_INFO.socialMedia.linkedin,
+    instagram: COMPANY_INFO.socialMedia.instagram,
   },
 };
 

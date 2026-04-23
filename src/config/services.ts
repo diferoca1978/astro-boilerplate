@@ -15,51 +15,51 @@ export interface Service {
 
 export const services: Service[] = [
   {
-    slug: "web-design",
-    title: "Web Design",
+    slug: "diseno-web",
+    title: "Diseño Web",
     description:
-      "We create stunning, conversion-focused websites that reflect your brand identity and engage your audience.",
+      "Creamos sitios web impresionantes y orientados a la conversión que reflejan la identidad de tu marca y conectan con tu audiencia.",
     seoDescription:
-      "Strategic web design that converts visitors into customers.",
-    image: "/images/services/web-design.jpg",
+      "Diseño web estratégico que convierte visitantes en clientes para empresas en Colombia.",
+    image: "/images/services/diseno-web.jpg",
     icon: "palette",
     benefits: [
-      "Custom responsive design",
-      "SEO optimized structure",
-      "Fast loading speed",
-      "User-friendly navigation",
+      "Diseño responsivo personalizado",
+      "Estructura optimizada para SEO",
+      "Velocidad de carga rápida",
+      "Navegación intuitiva",
     ],
   },
   {
-    slug: "digital-marketing",
-    title: "Digital Marketing",
+    slug: "marketing-digital",
+    title: "Marketing Digital",
     description:
-      "Authentic digital marketing strategies that connect with your audience and drive real results.",
+      "Estrategias de marketing digital auténticas que conectan con tu audiencia y generan resultados reales.",
     seoDescription:
-      "Authentic digital marketing strategies that connect with your audience.",
-    image: "/images/services/digital-marketing.jpg",
+      "Estrategias de marketing digital auténticas que conectan con tu audiencia y generan resultados medibles.",
+    image: "/images/services/marketing-digital.jpg",
     icon: "megaphone",
     benefits: [
-      "Social media management",
-      "Content strategy",
+      "Gestión de redes sociales",
+      "Estrategia de contenido",
       "Email marketing",
-      "Analytics & reporting",
+      "Analítica y reportes",
     ],
   },
   {
-    slug: "seo-optimization",
-    title: "SEO Optimization",
+    slug: "optimizacion-seo",
+    title: "Optimización SEO",
     description:
-      "Technical and content SEO to improve your visibility in search engines and attract organic traffic.",
+      "SEO técnico y de contenido para mejorar tu visibilidad en motores de búsqueda y atraer tráfico orgánico.",
     seoDescription:
-      "Technical SEO to improve your visibility in search engines.",
-    image: "/images/services/seo.jpg",
+      "SEO técnico y de contenido para mejorar tu visibilidad en Google y atraer tráfico cualificado.",
+    image: "/images/services/optimizacion-seo.jpg",
     icon: "search",
     benefits: [
-      "Keyword research",
-      "On-page optimization",
-      "Technical SEO audit",
-      "Link building strategy",
+      "Investigación de palabras clave",
+      "Optimización on-page",
+      "Auditoría SEO técnica",
+      "Estrategia de link building",
     ],
   },
 ];
