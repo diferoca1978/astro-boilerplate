@@ -6,7 +6,7 @@ export const MainNavigation = [
   { name: "Contacto", path: "/contacto" },
 ];
 
-export const ServicesNavigation = services.map((service) => ({
-  name: service.title,
-  path: `/servicios/${service.slug}`,
-}));
+// export const ServicesNavigation = services.map((service) => ({
+//   name: service.title,
+//   path: `/servicios/${service.slug}`,
+// }));

@@ -2,7 +2,7 @@ import type { SEOProps } from 'astro-seo';
 import type { Service } from './services';
 import { services } from './services';
 import type { Author } from './authorBio';
-import { AUTHORS, DEFAULT_AUTHOR, getAuthorByName } from './authorBio';
+import { AUTHORS, getAuthorByName } from './authorBio';
 import type { FAQItem } from './faqs';
 
 // Types
@@ -793,6 +793,88 @@ export function generateAuthorSchema(author: Author): JSONLDSchema {
 
 export function generateAllAuthorsSchemas(): JSONLDSchema[] {
   return AUTHORS.map((author) => generateAuthorSchema(author));
+}
+
+// Generic professional/expert schema — use for any service business where a named person
+// is the primary trust signal (lawyer, doctor, consultant, coach, architect, etc.)
+// Covers E-E-A-T requirements for YMYL verticals without being domain-specific.
+
+export interface ProfessionalPerson {
+  name: string;
+  alternateName?: string[];
+  description: string;
+  jobTitle: string;
+  occupationName: string;
+  occupationCity?: string;
+  image?: string;
+  url?: string;
+  email?: string;
+  phone?: string;
+  knowsAbout: string[];
+  credentials?: string[];
+  socialMedia?: {
+    linkedin?: string;
+    instagram?: string;
+    twitter?: string;
+    facebook?: string;
+    [key: string]: string | undefined;
+  };
+  address: {
+    street?: string;
+    city: string;
+    region: string;
+    postalCode?: string;
+    countryCode: string;
+  };
+}
+
+// Anchors the person to the organization via worksFor and generates sameAs from all provided socials.
+// Pass `credentials` (e.g. ["MBA", "Certified Coach"]) for richer knowsAbout signals.
+
+export function generatePersonSchema(person: ProfessionalPerson): JSONLDSchema {
+  const sameAs: string[] = [];
+  if (person.socialMedia) {
+    Object.values(person.socialMedia).forEach((url) => {
+      if (url) sameAs.push(url);
+    });
+  }
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    '@id': `${COMPANY_INFO.url}#${person.name.toLowerCase().replace(/\s+/g, '-')}`,
+    name: person.name,
+    ...(person.alternateName && person.alternateName.length > 0 && { alternateName: person.alternateName }),
+    description: person.description,
+    jobTitle: person.jobTitle,
+    hasOccupation: {
+      '@type': 'Occupation',
+      name: person.occupationName,
+      ...(person.occupationCity && {
+        occupationLocation: {
+          '@type': 'City',
+          name: person.occupationCity,
+        },
+      }),
+    },
+    worksFor: {
+      '@id': `${COMPANY_INFO.url}#organization`,
+    },
+    ...(person.image && { image: `${COMPANY_INFO.url}${person.image}` }),
+    ...(person.url && { url: `${COMPANY_INFO.url}${person.url}` }),
+    ...(person.email && { email: person.email }),
+    ...(person.phone && { telephone: person.phone }),
+    knowsAbout: [...person.knowsAbout, ...(person.credentials ?? [])],
+    address: {
+      '@type': 'PostalAddress',
+      ...(person.address.street && { streetAddress: person.address.street }),
+      addressLocality: person.address.city,
+      addressRegion: person.address.region,
+      ...(person.address.postalCode && { postalCode: person.address.postalCode }),
+      addressCountry: person.address.countryCode,
+    },
+    ...(sameAs.length > 0 && { sameAs }),
+  };
 }
 
 // Calculates aggregateRating automatically from the reviews array
