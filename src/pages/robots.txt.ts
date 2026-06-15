@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
 
-const getRobotsTxt = (sitemapURL: URL, siteURL: URL) => `
+const getRobotsTxt = (sitemapURL: URL) => `
 
 User-agent: *
 Allow: /
@@ -24,17 +24,13 @@ Allow: /
 User-agent: CCBot
 Allow: /
 
-# LLM Content Discovery
-Llms-Txt: ${siteURL.href}llms.txt
-
 Sitemap: ${sitemapURL.href}
 `;
 
 export const GET: APIRoute = ({ site }) => {
   const sitemapURL = new URL("sitemap-index.xml", site);
-  const siteURL = new URL("/", site);
 
-  return new Response(getRobotsTxt(sitemapURL, siteURL), {
+  return new Response(getRobotsTxt(sitemapURL), {
     headers: {
       "Content-Type": "text/plain; charset=utf-8",
     },
