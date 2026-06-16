@@ -3,8 +3,6 @@
 // src/config/authorBio.ts
 // =============================================================================
 
-import { COMPANY_INFO } from './seo';
-
 export interface Author {
   /** Author's full name */
   name: string;
@@ -66,13 +64,13 @@ export const AUTHORS: Author[] = [
  * Uses organization as generic author
  */
 export const DEFAULT_AUTHOR: Author = {
-  name: COMPANY_INFO.name,
+  name: "Tu Agencia Digital",
   role: "Digital Agency",
-  bio: COMPANY_INFO.description,
+  bio: "Transformamos tu presencia digital con estrategia, propósito y autenticidad. Diseño web, marketing digital y contenido que refleja tu verdadera esencia.",
   credentials: ["Digital Marketing", "Web Design", "Brand Strategy"],
   socialMedia: {
-    linkedin: COMPANY_INFO.socialMedia.linkedin,
-    instagram: COMPANY_INFO.socialMedia.instagram,
+    linkedin: "https://www.linkedin.com/company/tuagencia",
+    instagram: "https://www.instagram.com/tuagencia",
   },
 };
 
